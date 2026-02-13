@@ -148,13 +148,13 @@
               <div class="form-section">
                 <h3 class="small" style="margin:0 0 8px 0">Participación adicional</h3>
                 <div class="form-grid">
-                  <div><label>Municipalidad</label><input type="number" name="municipalidad" value="0" min="0"></div>
-                  <div><label>Estudiantes</label><input type="number" name="estudiantes" value="0" min="0"></div>
-                  <div><label>Agentes comunitarios</label><input type="number" name="agentes" value="0" min="0"></div>
-                  <div><label>Veterinarios particulares</label><input type="number" name="veterinarios" value="0" min="0"></div>
-                  <div><label>Otras microredes</label><input type="number" name="otras_microredes" value="0" min="0"></div>
-                  <div><label>UPCH y Monitores</label><input type="number" name="upch_monitores" value="0" min="0"></div>
-                  <div><label>Otros adicionales</label><input type="number" name="otros_adicionales" value="0" min="0"></div>
+                  <div><label>Municipalidad</label><input type="number" name="municipalidad" min="0"></div>
+                  <div><label>Estudiantes</label><input type="number" name="estudiantes" min="0"></div>
+                  <div><label>Agentes comunitarios</label><input type="number" name="agentes" min="0"></div>
+                  <div><label>Veterinarios particulares</label><input type="number" name="veterinarios" min="0"></div>
+                  <div><label>Otras microredes</label><input type="number" name="otras_microredes" min="0"></div>
+                  <div><label>UPCH y Monitores</label><input type="number" name="upch_monitores" min="0"></div>
+                  <div><label>Otros adicionales</label><input type="number" name="otros_adicionales" min="0"></div>
                   <div><label>Especificar otros</label><input type="text" name="otros_adicionales_desc"></div>
                 </div>
               </div>
@@ -289,6 +289,14 @@
           } else if (contentType.includes('application/json')) {
             const data = await res.json();
             showToast(data.message || 'Registro guardado');
+            // Si el guardado fue exitoso, limpiar el formulario para una nueva entrada
+            if (data.success) {
+              form.reset();
+              updateSummary();
+              updateProgress();
+              const first = form.querySelector('select, input, textarea');
+              if (first) first.focus();
+            }
           } else {
             const text = await res.text().catch(()=>'');
             console.error('Respuesta inesperada al guardar (no JSON):', text);

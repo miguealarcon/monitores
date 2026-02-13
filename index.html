@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Monitoreo VANCAN 2026</title>
+  <style>#formulario { display: none; }</style>
+</head>
+<body>
+  <h2>Login</h2>
+  <form id="loginForm">
+    Usuario: <input type="text" name="usuario" required><br>
+    Contraseña: <input type="password" name="password" required><br>
+    <button type="submit">Ingresar</button>
+  </form>
+
+  <div id="formulario">
+    <h2>Registro de Encuesta</h2>
+    <form id="miFormulario">
+      Microred: <input type="text" name="microred"><br>
+      Tipo de vacunación: <input type="text" name="vaccine_type"><br>
+      Fecha: <input type="date" name="fecha"><br>
+      Encargado: <input type="number" name="encargado"><br>
+      Inspectores: <input type="number" name="inspectores"><br>
+      Cadena de frío: <input type="number" name="cadena_frio"><br>
+      Promoción: <input type="number" name="promocion"><br>
+      Vacunadores: <input type="number" name="vacunadores"><br>
+      Anotadores: <input type="number" name="anotadores"><br>
+      Otros microred: <input type="number" name="otros_microred"><br>
+      Especificar otros: <input type="text" name="otros_microred_desc"><br>
+      Municipalidad: <input type="number" name="municipalidad"><br>
+      Estudiantes: <input type="number" name="estudiantes"><br>
+      Agentes: <input type="number" name="agentes"><br>
+      Veterinarios: <input type="number" name="veterinarios"><br>
+      Otras microredes: <input type="number" name="otras_microredes"><br>
+      UPCH Monitores: <input type="number" name="upch_monitores"><br>
+      Otros adicionales: <input type="number" name="otros_adicionales"><br>
+      Especificar otros: <input type="text" name="otros_adicionales_desc"><br>
+      <button type="submit">Guardar</button>
+    </form>
+  </div>
+
+  <script>
+    const url = "https://script.google.com/macros/s/TU_DEPLOY_ID/exec";
+
+    // Login
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      formData.append("login", "true");
+      fetch(url, { method: "POST", body: formData })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            alert("Login correcto");
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("formulario").style.display = "block";
+            window.usuarioActivo = formData.get("usuario");
+            window.passwordActivo = formData.get("password");
+          } else {
+            alert(data.message);
+          }
+        });
+    });
+
+    // Formulario
+    document.getElementById("miFormulario").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      formData.append("usuario", window.usuarioActivo);
+      formData.append("password", window.passwordActivo);
+      fetch(url, { method: "POST", body: formData })
+        .then(res => res.json())
+        .then(data => alert(data.message));
+    });
+  </script>
+</body>
+</html>
+

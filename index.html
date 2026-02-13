@@ -3,15 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <title>Monitoreo VANCAN 2026</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    #formulario { display: none; }
-    h2 { color: #007bff; }
-    label { display: block; margin-top: 10px; }
-    input, select, textarea { width: 300px; padding: 5px; margin-top: 5px; }
-    button { margin-top: 15px; padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
-    button:hover { background: #0056b3; }
-  </style>
+ <style>
+  body { 
+    font-family: Arial, sans-serif; 
+    margin: 20px; 
+  }
+
+  #formulario { 
+    display: none; 
+  }
+
+  h2 { 
+    color: #007bff; 
+  }
+
+  /* Contenedor en filas horizontales */
+  .form-grid {
+    display: flex;          /* coloca los elementos en fila */
+    flex-wrap: wrap;        /* permite que salten a la siguiente línea si no caben */
+    gap: 20px;              /* espacio entre cada bloque */
+  }
+
+  /* Cada pregunta con su etiqueta e input */
+  .form-item {
+    display: flex;
+    flex-direction: column; /* etiqueta arriba, input abajo */
+    width: 200px;           /* ancho fijo para cada campo */
+  }
+
+  label { 
+    margin-top: 5px; 
+    font-weight: bold; 
+  }
+
+  input, select, textarea { 
+    padding: 5px; 
+    margin-top: 5px; 
+  }
+
+  button { 
+    margin-top: 15px; 
+    padding: 10px 20px; 
+    background: #007bff; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+  }
+
+  button:hover { 
+    background: #0056b3; 
+  }
+</style>
+
 </head>
 <body>
   <h2>Login</h2>

@@ -179,7 +179,7 @@
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
     <script>
-      const url = "https://script.google.com/macros/s/AKfycbwLWCiyivT2KchBiqOR_6fMj3wUJXq_RgwpPcqEPuRvqihTtkmmXp91lJ4usqy077DV/exec";
+      const url = "https://script.google.com/macros/s/AKfycbwIKV5r2LP7Ql1yR58lcD5yJmNPbLHaMzx4vML00uF17lI2Vava0igEFpKTiBP-jEc9/exec";
 
       // util
       const $ = sel => document.querySelector(sel);
@@ -200,23 +200,37 @@
         const fd = new FormData(loginForm); fd.append('login','true');
         try{
           const res = await fetch(url, {method:'POST', body:fd});
-          const data = await res.json();
-          if(data.success){
-            usuarioActivo = fd.get('usuario'); passwordActivo = fd.get('password');
-            userLabel.textContent = usuarioActivo;
-            loginForm.closest('#loginCard').style.display = 'none';
-            formArea.classList.add('show');
-            updateProgress(); showToast('Login correcto');
-          } else { showToast(data.message || 'Credenciales incorrectas'); }
-        }catch(err){ showToast('Error de conexión'); }
+          const contentType = res.headers.get('content-type') || '';
+          if (!res.ok) {
+            const text = await res.text().catch(()=>'');
+            console.error('Respuesta no OK', res.status, text);
+            showToast('Error del servidor: ' + res.status);
+          } else if (contentType.includes('application/json')) {
+            const data = await res.json();
+            if(data.success){
+              usuarioActivo = fd.get('usuario'); passwordActivo = fd.get('password');
+              userLabel.textContent = usuarioActivo;
+              loginForm.closest('#loginCard').style.display = 'none';
+              formArea.classList.add('show');
+              updateProgress(); showToast('Login correcto');
+            } else { showToast(data.message || 'Credenciales incorrectas'); }
+          } else {
+            const text = await res.text().catch(()=>'');
+            console.error('Respuesta inesperada al loguear (no JSON):', text);
+            showToast('Respuesta inesperada: revisa permisos/CORS del Web App de Apps Script');
+          }
+        }catch(err){ console.error(err); showToast('Error de conexión'); }
         btn.disabled = false; btn.textContent = 'Ingresar';
       });
 
-      // demo quick access
-      $('#demoBtn').addEventListener('click', ()=>{
-        $('#usuario').value = 'demo'; $('#password').value = 'demo';
-        $('#loginForm').dispatchEvent(new Event('submit'));
-      });
+      // demo quick access (si existe el botón)
+      const demoBtn = $('#demoBtn');
+      if (demoBtn) {
+        demoBtn.addEventListener('click', ()=>{
+          $('#usuario').value = 'demo'; $('#password').value = 'demo';
+          $('#loginForm').dispatchEvent(new Event('submit'));
+        });
+      }
 
       // form interactivity
       const form = $('#miFormulario');
@@ -255,15 +269,32 @@
       // submit
       form.addEventListener('submit', async (e)=>{
         e.preventDefault();
+        // Antes de crear FormData, asegurar que campos numéricos vacíos se conviertan a 0
+        const numericInputs = getNumericInputs();
+        numericInputs.forEach(inp => {
+          if (inp.value === '' || inp.value == null) inp.value = '0';
+        });
+
         const saveBtn = $('#saveBtn'); saveBtn.disabled = true; saveBtn.textContent = 'Guardando...';
         const formData = new FormData(form);
         formData.append('usuario', usuarioActivo || 'anónimo');
         formData.append('password', passwordActivo || '');
         try{
           const res = await fetch(url, {method:'POST', body:formData});
-          const data = await res.json();
-          showToast(data.message || 'Registro guardado');
-        }catch(err){ showToast('Error al guardar'); }
+          const contentType = res.headers.get('content-type') || '';
+          if (!res.ok) {
+            const text = await res.text().catch(()=>'');
+            console.error('Error guardar (no OK):', res.status, text);
+            showToast('Error del servidor: ' + res.status);
+          } else if (contentType.includes('application/json')) {
+            const data = await res.json();
+            showToast(data.message || 'Registro guardado');
+          } else {
+            const text = await res.text().catch(()=>'');
+            console.error('Respuesta inesperada al guardar (no JSON):', text);
+            showToast('Respuesta inesperada: revisa permisos/CORS del Web App de Apps Script');
+          }
+        }catch(err){ console.error(err); showToast('Error al guardar (conexión)'); }
         saveBtn.disabled = false; saveBtn.textContent = 'Guardar registro';
       });
     </script>

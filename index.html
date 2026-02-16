@@ -45,7 +45,7 @@
       button.btn:disabled{opacity:0.6;cursor:not-allowed}
 
       /* Form layout */
-      .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+      .form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
       @media (max-width:760px){.form-grid{grid-template-columns:1fr}}
       .form-section{margin-top:16px}
       h2.section{margin:6px 0 10px 0;color:var(--primary)}
@@ -62,6 +62,8 @@
       .small{font-size:13px;color:var(--muted)}
       .fade{transition:all .28s ease;opacity:0;transform:translateY(6px);height:0;overflow:hidden}
       .fade.show{opacity:1;transform:none;height:auto}
+      .hidden-field{display:none}
+      .hidden-field.visible{display:block}
 
       /* toast */
       .toast{position:fixed;right:18px;bottom:18px;background:#111827;color:white;padding:10px 14px;border-radius:8px;box-shadow:0 8px 30px rgba(2,6,23,0.4);display:none}
@@ -126,27 +128,24 @@
                   <label for="fecha">Fecha</label>
                   <input id="fecha" name="fecha" type="date">
                 </div>
-                <div>
-                  <label>Encargado de la VANCAN</label>
-                  <input type="number" name="encargado" min="0">
-                </div>
-                <div>
-                  <label>Inspectores</label>
-                  <input type="number" name="inspectores" min="0">
-                </div>
-                <div>
-                  <label>Cadena de frío</label>
-                  <input type="number" name="cadena_frio" min="0">
-              </div>
-                <div><label>Promoción de la salud</label><input type="number" name="promocion" min="0"></div>
-                <div><label>Vacunadores</label><input type="number" name="vacunadores" min="0"></div>
-                <div><label>Anotadores</label><input type="number" name="anotadores" min="0"></div>
-                <div><label>Otros (microred)</label><input type="number" name="otros_microred" min="0"></div>
-                <div><label>Especificar otros</label><input type="text" name="otros_microred_desc"></div>
               </div>
 
               <div class="form-section">
-                <h3 class="small" style="margin:0 0 8px 0">Participación adicional</h3>
+                <h1 class="small" style="margin:0 0 8px 0; color:black;"><strong>¿1. Cuántas personas de la MICRORED participaron en la VANCAN?</strong></h1>
+                <div class="form-grid">
+                  <div><label>Encargado de la VANCAN</label><input type="number" name="encargado" min="0"></div>
+                    <div><label>Inspectores</label><input type="number" name="inspectores" min="0"></div>
+                    <div><label>Cadena de frío</label><input type="number" name="cadena_frio" min="0"></div>
+                    <div><label>Promoción de la salud</label><input type="number" name="promocion" min="0"></div>
+                    <div><label>Vacunadores</label><input type="number" name="vacunadores" min="0"></div>
+                    <div><label>Anotadores</label><input type="number" name="anotadores" min="0"></div>
+                    <div><label>Otros (microred)</label><input type="number" name="otros_microred" min="0"></div>
+                    <div class="hidden-field" id="especificar-microred"><label>Especificar otros</label><input type="text" name="otros_microred_desc"></div>
+                  </div>
+                </div>
+
+              <div class="form-section">
+                <h1 class="small" style="margin:0 0 8px 0; color:black;"><strong>2. ¿Cuántas personas adicionales participaron en la VANCAN:?</strong></h1>
                 <div class="form-grid">
                   <div><label>Municipalidad</label><input type="number" name="municipalidad" min="0"></div>
                   <div><label>Estudiantes</label><input type="number" name="estudiantes" min="0"></div>
@@ -155,7 +154,7 @@
                   <div><label>Otras microredes</label><input type="number" name="otras_microredes" min="0"></div>
                   <div><label>UPCH y Monitores</label><input type="number" name="upch_monitores" min="0"></div>
                   <div><label>Otros adicionales</label><input type="number" name="otros_adicionales" min="0"></div>
-                  <div><label>Especificar otros</label><input type="text" name="otros_adicionales_desc"></div>
+                  <div class="hidden-field" id="especificar-adicionales"><label>Especificar otros</label><input type="text" name="otros_adicionales_desc"></div>
                 </div>
               </div>
 
@@ -259,9 +258,33 @@
         progressBar.style.width = pct + '%';
       }
 
+      // toggle hidden fields
+      function toggleHiddenFields(){
+        const otrosMicrored = form.querySelector('input[name="otros_microred"]');
+        const especificarMicrored = document.getElementById('especificar-microred');
+        const inputMicroredDesc = form.querySelector('input[name=\"otros_microred_desc\"]');
+        const otrosAdicionales = form.querySelector('input[name=\"otros_adicionales\"]');
+        const especificarAdicionales = document.getElementById('especificar-adicionales');
+        const inputAdicionalesDesc = form.querySelector('input[name=\"otros_adicionales_desc\"]');
+        
+        if(Number(otrosMicrored.value) > 0){
+          especificarMicrored.classList.add('visible');
+        } else {
+          especificarMicrored.classList.remove('visible');
+          inputMicroredDesc.value = '';
+        }
+        
+        if(Number(otrosAdicionales.value) > 0){
+          especificarAdicionales.classList.add('visible');
+        } else {
+          especificarAdicionales.classList.remove('visible');
+          inputAdicionalesDesc.value = '';
+        }
+      }
+
       // listen inputs
-      form.addEventListener('input', ()=>{ updateSummary(); updateProgress(); });
-      document.addEventListener('DOMContentLoaded', ()=>{ updateSummary(); updateProgress(); });
+      form.addEventListener('input', ()=>{ updateSummary(); updateProgress(); toggleHiddenFields(); });
+      document.addEventListener('DOMContentLoaded', ()=>{ updateSummary(); updateProgress(); toggleHiddenFields(); });
 
       // reset
       $('#resetBtn').addEventListener('click', ()=>{ form.reset(); updateSummary(); updateProgress(); showToast('Formulario limpiado'); });

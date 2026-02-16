@@ -35,8 +35,28 @@
 
       /* Login */
       #loginCard{max-width:420px;margin:0 auto}
-      label{font-size:13px;margin-bottom:6px;display:block}
-      input[type=text], input[type=password], input[type=date], select, input[type=number]{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px;font-size:14px}
+      label{font-size:14px;margin-bottom:6px;display:block;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
+      input[type=text], input[type=password], input[type=date], select, input[type=number]{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px;font-size:14px;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
+      /* Radio buttons: solo se puede marcar 1 opción por pregunta */
+      .radio-group{display:flex;gap:32px;align-items:center;flex-wrap:wrap;margin-top:12px}
+      .radio-group label{margin:0;display:flex;align-items:center;gap:8px;font-size:14px;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
+      .radio-group input[type=radio]{margin:0;width:18px;height:18px;cursor:pointer}
+      /* Preguntas de secciones */
+      .question-title{font-size:14px;font-weight:600;margin:0 0 14px 0;color:var(--primary);font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
+      /* Título de secciones principales (preguntas 1, 2, 3) */
+      .section-title{font-size:16px;font-weight:700;margin:0 0 12px 0;color:var(--primary);font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
+      /* Checkboxes: múltiples opciones */
+      .checkbox-group{display:flex;gap:32px;align-items:center;flex-wrap:wrap;margin-top:12px}
+      .checkbox-group label{margin:0;display:flex;align-items:center;gap:8px;font-size:14px;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
+      .checkbox-group input[type=checkbox]{margin:0;width:18px;height:18px;cursor:pointer}
+      /* Título de secciones (II. DESARROLLO, II. CIERRE) */
+      .section-header{font-size:15px;font-weight:700;margin:20px 0 16px 0;padding:8px 0;border-top:2px solid var(--primary);border-bottom:2px solid var(--primary);color:var(--primary);font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
+      /* Campo de texto condicional (¿Quién?) */
+      .conditional-field{display:none;margin-top:10px}
+      .conditional-field.visible{display:block}
+      .conditional-field input{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px;font-size:14px;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
+      /* Textarea para observaciones */
+      textarea{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px;font-size:14px;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
       .actions{display:flex;gap:10px;align-items:center;margin-top:12px}
       /* Centrar botones dentro de la tarjeta de login */
       #loginCard .actions{justify-content:center}
@@ -129,9 +149,11 @@
                   <input id="fecha" name="fecha" type="date">
                 </div>
               </div>
+              <!-- I. APERTURA -->
+              <div class="section-header">I. APERTURA</div>
 
               <div class="form-section">
-                <h1 class="small" style="margin:0 0 8px 0; color:black;"><strong>¿1. Cuántas personas de la MICRORED participaron en la VANCAN?</strong></h1>
+                <h1 class="section-title">¿1. Cuántas personas de la MICRORED participaron en la VANCAN?</h1>
                 <div class="form-grid">
                   <div><label>Encargado de la VANCAN</label><input type="number" name="encargado" min="0"></div>
                     <div><label>Inspectores</label><input type="number" name="inspectores" min="0"></div>
@@ -145,7 +167,7 @@
                 </div>
 
               <div class="form-section">
-                <h1 class="small" style="margin:0 0 8px 0; color:black;"><strong>2. ¿Cuántas personas adicionales participaron en la VANCAN:?</strong></h1>
+                <h1 class="section-title">2. ¿Cuántas personas adicionales participaron en la VANCAN:?</h1>
                 <div class="form-grid">
                   <div><label>Municipalidad</label><input type="number" name="municipalidad" min="0"></div>
                   <div><label>Estudiantes</label><input type="number" name="estudiantes" min="0"></div>
@@ -156,6 +178,82 @@
                   <div><label>Otros adicionales</label><input type="number" name="otros_adicionales" min="0"></div>
                   <div class="hidden-field" id="especificar-adicionales"><label>Especificar otros</label><input type="text" name="otros_adicionales_desc"></div>
                 </div>
+              </div>
+
+              <!-- Sección 3: Estado de materiales (radio buttons para seleccionar solo 1 opción) -->
+              <div class="form-section">
+                <h1 class="section-title">3. Estado de materiales a las 7:45 am</h1>
+                
+                <div style="margin-bottom:20px">
+                  <p class="question-title">Termos / congelantes:</p>
+                  <div class="radio-group">
+                    <label><input type="radio" name="termos_estado" value="Listo"> Listo</label>
+                    <label><input type="radio" name="termos_estado" value="En preparación"> En preparación</label>
+                    <label><input type="radio" name="termos_estado" value="No preparado"> No preparado</label>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="question-title">Jeringa, EPP, carnet, caja de bioseguridad, bolsas:</p>
+                  <div class="radio-group">
+                    <label><input type="radio" name="materiales_estado" value="Listo"> Listo</label>
+                    <label><input type="radio" name="materiales_estado" value="En preparación"> En preparación</label>
+                    <label><input type="radio" name="materiales_estado" value="No preparado"> No preparado</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- II. DESARROLLO -->
+              <div class="section-header">II. DESARROLLO</div>
+
+              <!-- Pregunta 4: Hubo supervisión durante la VANCAN (checkboxes - múltiples opciones) -->
+              <div class="form-section">
+                <h1 class="section-title">4. ¿Hubo supervisión durante la VANCAN?</h1>
+                <div class="checkbox-group">
+                  <label><input type="checkbox" name="supervision" value="Gerencia"> Gerencia</label>
+                  <label><input type="checkbox" name="supervision" value="Red"> Red</label>
+                  <label><input type="checkbox" name="supervision" value="No hubo"> No hubo</label>
+                  <label><input type="checkbox" name="supervision" value="Microred" id="microred-check"> Microred</label>
+                </div>
+                <div class="conditional-field" id="supervision-quien">
+                  <label>¿Quién?</label>
+                  <input type="text" name="supervision_quien" placeholder="Especificar nombre/entidad">
+                </div>
+              </div>
+
+              <!-- Pregunta 5: Hubo supervisión de cadena de frío (radio buttons - una sola opción) -->
+              <div class="form-section">
+                <h1 class="section-title">5. ¿Hubo supervisión de cadena de frío durante la VANCAN?</h1>
+                <div class="radio-group">
+                  <label><input type="radio" name="cadena_supervicion" value="No" id="cadena-no"> No</label>
+                  <label><input type="radio" name="cadena_supervicion" value="Sí" id="cadena-si"> Sí</label>
+                </div>
+                <div class="conditional-field" id="cadena-quien">
+                  <label>¿Quién?</label>
+                  <input type="text" name="cadena_quien" placeholder="Especificar nombre/entidad">
+                </div>
+              </div>
+
+              <!-- Pregunta 6: Promoción de la salud participó (radio buttons - una sola opción) -->
+              <div class="form-section">
+                <h1 class="section-title">6. ¿Promoción de la salud participó durante la VANCAN?</h1>
+                <div class="radio-group">
+                  <label><input type="radio" name="promocion_participo" value="No" id="promocion-no"> No</label>
+                  <label><input type="radio" name="promocion_participo" value="Sí" id="promocion-si"> Sí</label>
+                </div>
+                <div class="conditional-field" id="promocion-quien">
+                  <label>¿Quién?</label>
+                  <input type="text" name="promocion_quien" placeholder="Especificar nombre/entidad">
+                </div>
+              </div>
+
+              <!-- II. CIERRE -->
+              <div class="section-header">II. CIERRE</div>
+
+              <!-- Pregunta 7: Observaciones (textarea libre) -->
+              <div class="form-section">
+                <h1 class="section-title">7. ¿Algún comentario y/o sugerencia sobre la actividad de hoy?</h1>
+                <textarea name="observaciones" rows="4" placeholder="Escribe tus comentarios y sugerencias aquí..."></textarea>
               </div>
 
               <div style="display:flex;gap:12px;align-items:center;margin-top:14px">
@@ -280,10 +378,47 @@
           especificarAdicionales.classList.remove('visible');
           inputAdicionalesDesc.value = '';
         }
+
+        // Pregunta 4: mostrar "¿Quién?" si está marcado "Microred"
+        const microredCheck = document.getElementById('microred-check');
+        const supervisionQuien = document.getElementById('supervision-quien');
+        const inputSupervisionQuien = form.querySelector('input[name="supervision_quien"]');
+        
+        if(microredCheck && microredCheck.checked){
+          supervisionQuien.classList.add('visible');
+        } else {
+          supervisionQuien.classList.remove('visible');
+          if(inputSupervisionQuien) inputSupervisionQuien.value = '';
+        }
+
+        // Pregunta 5: mostrar "¿Quién?" si está marcado "Sí"
+        const cadenaCheck = document.getElementById('cadena-si');
+        const cadenaQuien = document.getElementById('cadena-quien');
+        const inputCadenaQuien = form.querySelector('input[name="cadena_quien"]');
+        
+        if(cadenaCheck && cadenaCheck.checked){
+          cadenaQuien.classList.add('visible');
+        } else {
+          cadenaQuien.classList.remove('visible');
+          if(inputCadenaQuien) inputCadenaQuien.value = '';
+        }
+
+        // Pregunta 6: mostrar "¿Quién?" si está marcado "Sí"
+        const promocionCheck = document.getElementById('promocion-si');
+        const promocionQuien = document.getElementById('promocion-quien');
+        const inputPromocionQuien = form.querySelector('input[name="promocion_quien"]');
+        
+        if(promocionCheck && promocionCheck.checked){
+          promocionQuien.classList.add('visible');
+        } else {
+          promocionQuien.classList.remove('visible');
+          if(inputPromocionQuien) inputPromocionQuien.value = '';
+        }
       }
 
       // listen inputs
       form.addEventListener('input', ()=>{ updateSummary(); updateProgress(); toggleHiddenFields(); });
+      form.addEventListener('change', ()=>{ toggleHiddenFields(); });
       document.addEventListener('DOMContentLoaded', ()=>{ updateSummary(); updateProgress(); toggleHiddenFields(); });
 
       // reset

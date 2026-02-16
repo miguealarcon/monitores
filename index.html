@@ -155,28 +155,28 @@
               <div class="form-section">
                 <h1 class="section-title">¿1. Cuántas personas de la MICRORED participaron en la VANCAN?</h1>
                 <div class="form-grid">
-                  <div><label>Encargado de la VANCAN</label><input type="number" name="encargado" min="0"></div>
-                    <div><label>Inspectores</label><input type="number" name="inspectores" min="0"></div>
-                    <div><label>Cadena de frío</label><input type="number" name="cadena_frio" min="0"></div>
-                    <div><label>Promoción de la salud</label><input type="number" name="promocion" min="0"></div>
-                    <div><label>Vacunadores</label><input type="number" name="vacunadores" min="0"></div>
-                    <div><label>Anotadores</label><input type="number" name="anotadores" min="0"></div>
-                    <div><label>Otros (microred)</label><input type="number" name="otros_microred" min="0"></div>
-                    <div class="hidden-field" id="especificar-microred"><label>Especificar otros</label><input type="text" name="otros_microred_desc"></div>
+                  <div><label>Encargado de la VANCAN</label><input type="number" name="mr_encargado" min="0"></div>
+                    <div><label>Inspectores</label><input type="number" name="mr_inspectores" min="0"></div>
+                    <div><label>Cadena de frío</label><input type="number" name="mr_cadena_frio" min="0"></div>
+                    <div><label>Promoción de la salud</label><input type="number" name="mr_promocion" min="0"></div>
+                    <div><label>Vacunadores</label><input type="number" name="mr_vacunadores" min="0"></div>
+                    <div><label>Anotadores</label><input type="number" name="mr_anotadores" min="0"></div>
+                    <div><label>Otros (microred)</label><input type="number" name="mr_otros" min="0"></div>
+                    <div class="hidden-field" id="especificar-microred"><label>Especificar otros</label><input type="text" name="mr_otros_esp"></div>
                   </div>
                 </div>
 
               <div class="form-section">
                 <h1 class="section-title">2. ¿Cuántas personas adicionales participaron en la VANCAN:?</h1>
                 <div class="form-grid">
-                  <div><label>Municipalidad</label><input type="number" name="municipalidad" min="0"></div>
-                  <div><label>Estudiantes</label><input type="number" name="estudiantes" min="0"></div>
-                  <div><label>Agentes comunitarios</label><input type="number" name="agentes" min="0"></div>
-                  <div><label>Veterinarios particulares</label><input type="number" name="veterinarios" min="0"></div>
-                  <div><label>Otras microredes</label><input type="number" name="otras_microredes" min="0"></div>
-                  <div><label>UPCH y Monitores</label><input type="number" name="upch_monitores" min="0"></div>
-                  <div><label>Otros adicionales</label><input type="number" name="otros_adicionales" min="0"></div>
-                  <div class="hidden-field" id="especificar-adicionales"><label>Especificar otros</label><input type="text" name="otros_adicionales_desc"></div>
+                  <div><label>Municipalidad</label><input type="number" name="add_municipalidad" min="0"></div>
+                  <div><label>Estudiantes</label><input type="number" name="add_estudiantes" min="0"></div>
+                  <div><label>Agentes comunitarios</label><input type="number" name="add_agentes" min="0"></div>
+                  <div><label>Veterinarios particulares</label><input type="number" name="add_veterinarios" min="0"></div>
+                  <div><label>Otras microredes</label><input type="number" name="add_otras_microredes" min="0"></div>
+                  <div><label>UPCH y Monitores</label><input type="number" name="add_upch_monitores" min="0"></div>
+                  <div><label>Otros adicionales</label><input type="number" name="add_otros" min="0"></div>
+                  <div class="hidden-field" id="especificar-adicionales"><label>Especificar otros</label><input type="text" name="add_otros_esp"></div>
                 </div>
               </div>
 
@@ -187,18 +187,18 @@
                 <div style="margin-bottom:20px">
                   <p class="question-title">Termos / congelantes:</p>
                   <div class="radio-group">
-                    <label><input type="radio" name="termos_estado" value="Listo"> Listo</label>
-                    <label><input type="radio" name="termos_estado" value="En preparación"> En preparación</label>
-                    <label><input type="radio" name="termos_estado" value="No preparado"> No preparado</label>
+                    <label><input type="radio" name="est_term_cong" value="Listo"> Listo</label>
+                    <label><input type="radio" name="est_term_cong" value="En preparación"> En preparación</label>
+                    <label><input type="radio" name="est_term_cong" value="No preparado"> No preparado</label>
                   </div>
                 </div>
 
                 <div>
                   <p class="question-title">Jeringa, EPP, carnet, caja de bioseguridad, bolsas:</p>
                   <div class="radio-group">
-                    <label><input type="radio" name="materiales_estado" value="Listo"> Listo</label>
-                    <label><input type="radio" name="materiales_estado" value="En preparación"> En preparación</label>
-                    <label><input type="radio" name="materiales_estado" value="No preparado"> No preparado</label>
+                    <label><input type="radio" name="est_epp" value="Listo"> Listo</label>
+                    <label><input type="radio" name="est_epp" value="En preparación"> En preparación</label>
+                    <label><input type="radio" name="est_epp" value="No preparado"> No preparado</label>
                   </div>
                 </div>
               </div>
@@ -210,14 +210,14 @@
               <div class="form-section">
                 <h1 class="section-title">4. ¿Hubo supervisión durante la VANCAN?</h1>
                 <div class="checkbox-group">
-                  <label><input type="checkbox" name="supervision" value="Gerencia"> Gerencia</label>
-                  <label><input type="checkbox" name="supervision" value="Red"> Red</label>
-                  <label><input type="checkbox" name="supervision" value="No hubo"> No hubo</label>
-                  <label><input type="checkbox" name="supervision" value="Microred" id="microred-check"> Microred</label>
+                  <label><input type="checkbox" name="vancan_super" value="Gerencia"> Gerencia</label>
+                  <label><input type="checkbox" name="vancan_super" value="Red"> Red</label>
+                  <label><input type="checkbox" name="vancan_super" value="No hubo"> No hubo</label>
+                  <label><input type="checkbox" name="vancan_super" value="Microred" id="microred-check"> Microred</label>
                 </div>
-                <div class="conditional-field" id="supervision-quien">
+                <div class="conditional-field" id="vancan_super-vancan_super_who">
                   <label>¿Quién?</label>
-                  <input type="text" name="supervision_quien" placeholder="Especificar nombre/entidad">
+                  <input type="text" name="vancan_super_who" placeholder="Especificar nombre/entidad">
                 </div>
               </div>
 
@@ -225,12 +225,12 @@
               <div class="form-section">
                 <h1 class="section-title">5. ¿Hubo supervisión de cadena de frío durante la VANCAN?</h1>
                 <div class="radio-group">
-                  <label><input type="radio" name="cadena_supervicion" value="No" id="cadena-no"> No</label>
-                  <label><input type="radio" name="cadena_supervicion" value="Sí" id="cadena-si"> Sí</label>
+                  <label><input type="radio" name="cadena_f_super" value="No" id="cadena-no"> No</label>
+                  <label><input type="radio" name="cadena_f_super" value="Sí" id="cadena-si"> Sí</label>
                 </div>
                 <div class="conditional-field" id="cadena-quien">
                   <label>¿Quién?</label>
-                  <input type="text" name="cadena_quien" placeholder="Especificar nombre/entidad">
+                  <input type="text" name="cadena_who" placeholder="Especificar nombre/entidad">
                 </div>
               </div>
 
@@ -238,12 +238,12 @@
               <div class="form-section">
                 <h1 class="section-title">6. ¿Promoción de la salud participó durante la VANCAN?</h1>
                 <div class="radio-group">
-                  <label><input type="radio" name="promocion_participo" value="No" id="promocion-no"> No</label>
-                  <label><input type="radio" name="promocion_participo" value="Sí" id="promocion-si"> Sí</label>
+                  <label><input type="radio" name="promo_partic" value="No" id="promocion-no"> No</label>
+                  <label><input type="radio" name="promo_partic" value="Sí" id="promocion-si"> Sí</label>
                 </div>
                 <div class="conditional-field" id="promocion-quien">
                   <label>¿Quién?</label>
-                  <input type="text" name="promocion_quien" placeholder="Especificar nombre/entidad">
+                  <input type="text" name="promo_who" placeholder="Especificar nombre/entidad">
                 </div>
               </div>
 
@@ -358,12 +358,12 @@
 
       // toggle hidden fields
       function toggleHiddenFields(){
-        const otrosMicrored = form.querySelector('input[name="otros_microred"]');
+        const otrosMicrored = form.querySelector('input[name="mr_otros"]');
         const especificarMicrored = document.getElementById('especificar-microred');
-        const inputMicroredDesc = form.querySelector('input[name=\"otros_microred_desc\"]');
-        const otrosAdicionales = form.querySelector('input[name=\"otros_adicionales\"]');
+        const inputMicroredDesc = form.querySelector('input[name=\"mr_otros_esp\"]');
+        const otrosAdicionales = form.querySelector('input[name=\"add_otros\"]');
         const especificarAdicionales = document.getElementById('especificar-adicionales');
-        const inputAdicionalesDesc = form.querySelector('input[name=\"otros_adicionales_desc\"]');
+        const inputAdicionalesDesc = form.querySelector('input[name=\"add_otros_esp\"]');
         
         if(Number(otrosMicrored.value) > 0){
           especificarMicrored.classList.add('visible');
@@ -381,8 +381,8 @@
 
         // Pregunta 4: mostrar "¿Quién?" si está marcado "Microred"
         const microredCheck = document.getElementById('microred-check');
-        const supervisionQuien = document.getElementById('supervision-quien');
-        const inputSupervisionQuien = form.querySelector('input[name="supervision_quien"]');
+        const supervisionQuien = document.getElementById('vancan_super-vancan_super_who');
+        const inputSupervisionQuien = form.querySelector('input[name="vancan_super_who"]');
         
         if(microredCheck && microredCheck.checked){
           supervisionQuien.classList.add('visible');
@@ -394,7 +394,7 @@
         // Pregunta 5: mostrar "¿Quién?" si está marcado "Sí"
         const cadenaCheck = document.getElementById('cadena-si');
         const cadenaQuien = document.getElementById('cadena-quien');
-        const inputCadenaQuien = form.querySelector('input[name="cadena_quien"]');
+        const inputCadenaQuien = form.querySelector('input[name="cadena_who"]');
         
         if(cadenaCheck && cadenaCheck.checked){
           cadenaQuien.classList.add('visible');
@@ -406,7 +406,7 @@
         // Pregunta 6: mostrar "¿Quién?" si está marcado "Sí"
         const promocionCheck = document.getElementById('promocion-si');
         const promocionQuien = document.getElementById('promocion-quien');
-        const inputPromocionQuien = form.querySelector('input[name="promocion_quien"]');
+        const inputPromocionQuien = form.querySelector('input[name="promo_who"]');
         
         if(promocionCheck && promocionCheck.checked){
           promocionQuien.classList.add('visible');

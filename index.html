@@ -135,7 +135,7 @@
                 <div>
                   <label for="microred">Microred</label>
                   <select id="microred" name="microred">
-                    <option>""</option>
+                    <option value="" selected disable>Seleccione una microred...</option>option>
                     <option>Alto Selva Alegre</option>
                     <option>Ampliacion Paucarpata</option>
                     <option>Buenos Aires</option>
@@ -161,7 +161,11 @@
                 </div>
                 <div>
                   <label for="vaccine_type">Tipo de vacunación</label>
-                  <select id="vaccine_type" name="vaccine_type"><option>general</option><option>barrido</option></select>
+                  <select id="vaccine_type" name="vaccine_type">
+                    <option value="" selected disable>Seleccione el tipo de vacunacion...</option>option>
+                    <option>general</option>
+                    <option>barrido</option>
+                  </select>
                 </div>
                 <div>
                   <label for="fecha">Fecha</label>
